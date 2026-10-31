@@ -1,0 +1,25 @@
+{
+  "name": "app-service-servicebus",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A producer and consumer passing messages through Service Bus into Table Storage, authenticating with managed identities.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@azure/data-tables": "^13.3.0",
+    "@azure/service-bus": "^7.9.5",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@azure/core-auth": "^1.9.0",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.2"
+  }
+}
