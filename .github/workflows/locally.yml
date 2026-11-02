@@ -35,6 +35,8 @@ jobs:
           plugins: custom
           plugins-list: |
             Microsoft.ContainerRegistry
+            Microsoft.Insights
+            Microsoft.OperationalInsights
             Microsoft.ServiceBus
             Microsoft.Storage
             Microsoft.Web
