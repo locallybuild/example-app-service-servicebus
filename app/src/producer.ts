@@ -49,7 +49,8 @@ export async function runProducer(port: number): Promise<void> {
   }));
 
   app.post("/send", handle(async (req, res) => {
-    const text = String(req.body.text ?? "").trim();
+    // Express 5 leaves req.body undefined when the request has no form body.
+    const text = String(req.body?.text ?? "").trim();
     if (!text) {
       res.redirect(303, "/");
       return;

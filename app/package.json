@@ -9,17 +9,17 @@
     "start": "node dist/index.js"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=26"
   },
   "dependencies": {
-    "@azure/data-tables": "^13.3.0",
-    "@azure/service-bus": "^7.9.5",
-    "express": "^4.21.2"
+    "@azure/data-tables": "^13.3.2",
+    "@azure/service-bus": "^7.10.0",
+    "express": "^5.3.0"
   },
   "devDependencies": {
-    "@azure/core-auth": "^1.9.0",
-    "@types/express": "^4.17.21",
-    "@types/node": "^22.10.0",
-    "typescript": "^5.7.2"
+    "@azure/core-auth": "^1.11.0",
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.6",
+    "typescript": "^7.0.2"
   }
 }
