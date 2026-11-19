@@ -64,13 +64,13 @@ Shared-key and SAS authentication are switched off on both the Service Bus names
 
 ## Running the example
 
-First, make sure your container runtime (Docker or Podman) is running, then start Locally:
+First up, we need to ensure our container runtime (Docker or Podman) is running, then launch Locally:
 
 ```bash
 locally build
 ```
 
-With Locally running, open another terminal and initialise Terraform. This downloads the providers and sets up the module:
+With Locally running, in another terminal we can initialise Terraform, which both downloads the providers we need and configures the module for use:
 
 ```bash
 cd environments/locally
@@ -78,17 +78,17 @@ terraform init
 ```
 
 > [!NOTE]
-> You can use OpenTofu instead by running `tofu` wherever this says `terraform`.
+> It's possible to use OpenTofu here by substituting `terraform` for `tofu`.
 
-Once Terraform is initialised, provision the example:
+With Terraform initialised, we can then provision the example by running:
 
 ```bash
 locally run terraform apply
 ```
 
-During the apply, Terraform builds the app with `docker build` and pushes it to the Container Registry, so the `docker` command needs to be available. With Podman, the `podman-docker` shim or a `docker` alias works.
+As part of the apply, the app is built with `docker build` and pushed into the Container Registry, so the `docker` command needs to be available (with Podman, the `podman-docker` shim or a `docker` alias works).
 
-After you approve the plan and the resources are deployed, both apps are running at the URLs in the outputs:
+Once you approve the plan and the resources have been deployed, both apps are running at the URLs in the outputs:
 
 ```
 producer_url = "https://locally-example-servicebus-producer.furnace.locally:5663"
@@ -105,7 +105,7 @@ You can also look at each step from the CLI. To peek at messages still on the qu
 locally servicebus queue peek --namespace locally-example-servicebus-bus --name messages
 ```
 
-Both apps send their logs to a Log Analytics Workspace. You can query them in [the Monitoring section of the Locally Dashboard](https://localhost:5678/monitoring/components) by running:
+As this Terraform configuration sends the App Service logs into a Log Analytics Workspace, we can then query them within [the Locally Dashboard, in the Monitoring section](https://localhost:5678/monitoring/components), by running:
 
 ```
 AppServiceConsoleLogs | order by TimeGenerated desc
@@ -113,7 +113,7 @@ AppServiceConsoleLogs | order by TimeGenerated desc
 
 ## Notes
 
-This example has no sign-in of its own: anyone who can reach the producer can send messages, and anyone who can reach the consumer can read them. That keeps the example focused on the identity → Service Bus → Table Storage wiring. A real app would sit behind authentication.
+This example has no sign-in of its own: anyone who can reach the producer can send messages, and anyone who can reach the consumer can read them. That keeps it focused on the identity → Service Bus → Table Storage wiring - a real app would sit behind authentication.
 
 The consumer completes a message only after its row has been written. If the write fails, the message goes back on the queue and is retried. After 5 failed deliveries it moves to the dead-letter sub-queue. Each row's key comes from when the message was enqueued plus its ID, so a redelivered message overwrites its own row instead of being stored twice.
 
